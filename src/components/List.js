@@ -1,10 +1,12 @@
 import React from "react";
 import Item from "./Item";
 
-const List = () => {
+const List = ({ items }) => {
   return (
     <ul>
-      <Item>item</Item>
+      {items.map((item) => (
+        <Item name={item.name}></Item>
+      ))}
     </ul>
   );
 };
