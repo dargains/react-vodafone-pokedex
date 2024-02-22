@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import List from "./components/List";
+import { Route, Routes } from "react-router-dom";
+import Home from "./components/Home";
+import Pokemon from "./components/Pokemon";
+import PageNotFound from "./components/PageNotFound";
 
 const App = () => {
-  const [query, setQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(0);
   const [items, setItems] = useState([]);
 
@@ -32,20 +34,21 @@ const App = () => {
   return (
     <div className="App">
       <h1>Pokédex</h1>
-      <div>
-        <label htmlFor="search">Search</label>
-        <input
-          type="text"
-          name="search"
-          id="search"
-          value={query}
-          onChange={({ target }) => setQuery(target.value)}
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <Home
+              items={items}
+              getItems={getItems}
+              handleNext={handleNext}
+              handlePrev={handlePrev}
+            />
+          }
         />
-        <button onClick={getItems}>Search</button>
-      </div>
-      <List items={items}></List>
-      <button onClick={handlePrev}>prev</button>
-      <button onClick={handleNext}>next</button>
+        <Route path="/pokemon/:name" element={<Pokemon />} />
+        <Route path="*" element={PageNotFound} />
+      </Routes>
     </div>
   );
 };
