@@ -3,8 +3,8 @@ import Home from "./components/Home";
 import Pokemon from "./components/Pokemon";
 import PageNotFound from "./components/PageNotFound";
 
-const App = () => {
-  return (
+const App = () => (
+  <>
     <main className="App">
       <h1>Pokédex</h1>
       <Routes>
@@ -12,11 +12,11 @@ const App = () => {
         <Route path="/pokemon/:name" element={<Pokemon />} />
         <Route path="*" element={PageNotFound} />
       </Routes>
-      <footer>
-        <p>Made By André Dargains - Vodafone Portugal</p>
-      </footer>
     </main>
-  );
-};
+    <footer>
+      <p>Made By André Dargains - Vodafone Portugal</p>
+    </footer>
+  </>
+);
 
 export default App;

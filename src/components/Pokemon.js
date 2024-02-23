@@ -2,25 +2,24 @@ import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 
-const PokemonItem = ({ name, sprites, types, stats }) => {
-  return (
-    <>
-      <h2 id="name">{name}</h2>
-      <figure>
-        <img src={sprites.front_default} alt={`${name} front`} />
-        <img src={sprites.back_default} alt={`${name} back`} />
-      </figure>
-      <h3>{`type${types.length > 1 ? "s" : null}:`}</h3>
-      <p>{types.map((type) => type.type.name).join(" and ")}</p>
-      <h3>stats:</h3>
-      {stats.map((stat) => (
-        <p>
-          {stat.stat.name}: {stat.base_stat}
-        </p>
-      ))}
-    </>
-  );
-};
+const RenderPokemon = ({ name, sprites, types, stats, cries }) => (
+  <>
+    <h2 id="name">{name} </h2>
+    <figure>
+      <img src={sprites.front_default} alt={`${name} front`} />
+      <img src={sprites.back_default} alt={`${name} back`} />
+    </figure>
+    <audio src={cries.legacy} controls></audio>
+    <h3>{`Type${types.length > 1 ? "s" : ""}:`}</h3>
+    <p>{types.map((type) => type.type.name).join(" and ")}</p>
+    <h3>Stats:</h3>
+    {stats.map((stat) => (
+      <p>
+        {stat.stat.name}: {stat.base_stat}
+      </p>
+    ))}
+  </>
+);
 
 const Pokemon = () => {
   let { name } = useParams();
@@ -41,7 +40,7 @@ const Pokemon = () => {
     <section>
       <div>
         {Object.keys(pokemon).length ? (
-          <PokemonItem {...pokemon} />
+          <RenderPokemon {...pokemon} />
         ) : (
           <div>loading...</div>
         )}
