@@ -8,13 +8,19 @@ const Pagination = ({
   ITEMS_PER_PAGE,
 }) => {
   return (
-    <footer>
-      {currentPage ? <button onClick={handlePrev}>prev</button> : null}
+    <footer id="pagination">
+      {currentPage ? (
+        <button onClick={handlePrev} id="previous">
+          prev
+        </button>
+      ) : null}
       <span>
         Page {currentPage + 1} of {Math.ceil(total / ITEMS_PER_PAGE)}
       </span>
       {currentPage < Math.ceil(total / ITEMS_PER_PAGE) - 1 ? (
-        <button onClick={handleNext}>next</button>
+        <button onClick={handleNext} id="next">
+          next
+        </button>
       ) : null}
     </footer>
   );

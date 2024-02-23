@@ -10,7 +10,7 @@ const Home = () => {
   const [items, setItems] = useState([]);
   const [total, setTotal] = useState(0);
 
-  const ITEMS_PER_PAGE = 30;
+  const ITEMS_PER_PAGE = 10;
 
   const getItems = async () => {
     const {

@@ -5,7 +5,7 @@ import axios from "axios";
 const PokemonItem = ({ name, sprites, types, stats }) => {
   return (
     <>
-      <h2>{name}</h2>
+      <h2 id="name">{name}</h2>
       <figure>
         <img src={sprites.front_default} alt={`${name} front`} />
         <img src={sprites.back_default} alt={`${name} back`} />
