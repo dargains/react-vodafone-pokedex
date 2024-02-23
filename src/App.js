@@ -8,7 +8,7 @@ const App = () => {
     <div className="App">
       <h1>Pokédex</h1>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/:page?" element={<Home />} />
         <Route path="/pokemon/:name" element={<Pokemon />} />
         <Route path="*" element={PageNotFound} />
       </Routes>

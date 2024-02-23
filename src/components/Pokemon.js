@@ -22,9 +22,7 @@ const Pokemon = () => {
 
   const getPokemonData = async () => {
     console.log(name);
-    const { data } = await axios.get(
-      `https://pokeapi.co/api/v2/pokemon/${name}`
-    );
+    const { data } = await axios.get(`${name}`);
 
     setPokemon(data);
   };
