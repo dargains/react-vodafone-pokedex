@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 
-const PokemonItem = ({ name, sprites, types }) => {
+const PokemonItem = ({ name, sprites, types, stats }) => {
   return (
     <>
       <h2>{name}</h2>
@@ -10,7 +10,14 @@ const PokemonItem = ({ name, sprites, types }) => {
         <img src={sprites.front_default} alt={`${name} front`} />
         <img src={sprites.back_default} alt={`${name} back`} />
       </figure>
-      <p>types: {types.map((type) => type.type.name).join(" and ")}</p>
+      <h3>{`type${types.length > 1 ? "s" : null}:`}</h3>
+      <p>{types.map((type) => type.type.name).join(" and ")}</p>
+      <h3>stats:</h3>
+      {stats.map((stat) => (
+        <p>
+          {stat.stat.name}: {stat.base_stat}
+        </p>
+      ))}
     </>
   );
 };
@@ -21,7 +28,6 @@ const Pokemon = () => {
   const [pokemon, setPokemon] = useState({});
 
   const getPokemonData = async () => {
-    console.log(name);
     const { data } = await axios.get(`${name}`);
 
     setPokemon(data);

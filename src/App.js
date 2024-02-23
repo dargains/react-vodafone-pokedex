@@ -5,14 +5,17 @@ import PageNotFound from "./components/PageNotFound";
 
 const App = () => {
   return (
-    <div className="App">
+    <main className="App">
       <h1>Pokédex</h1>
       <Routes>
-        <Route path="/:page?" element={<Home />} />
+        <Route path="/" element={<Home />} />
         <Route path="/pokemon/:name" element={<Pokemon />} />
         <Route path="*" element={PageNotFound} />
       </Routes>
-    </div>
+      <footer>
+        <p>Made By André Dargains - Vodafone Portugal</p>
+      </footer>
+    </main>
   );
 };
 

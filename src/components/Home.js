@@ -1,29 +1,34 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import List from "./List";
 import Pagination from "./Pagination";
 
 const Home = () => {
-  const { page } = useParams();
-  const [currentPage, setCurrentPage] = useState(page || 0);
+  const [currentPage, setCurrentPage] = useState(0);
   const [query, setQuery] = useState("");
   const [items, setItems] = useState([]);
   const [total, setTotal] = useState(0);
 
-  const ITEMS_PER_PAGE = 10;
+  const ITEMS_PER_PAGE = 30;
 
   const getItems = async () => {
     const {
       data: { results, count },
-    } = await axios.get(`?limit=10&offset=${currentPage * ITEMS_PER_PAGE}`);
+    } = await axios.get(
+      `?limit=${ITEMS_PER_PAGE}&offset=${currentPage * ITEMS_PER_PAGE}`
+    );
     setItems(results);
     setTotal(count);
   };
 
-  useEffect(() => {
-    setCurrentPage(parseInt(page));
-  }, [page]);
+  const handlePrev = () => {
+    setCurrentPage(currentPage - 1);
+  };
+
+  const handleNext = () => {
+    setCurrentPage(currentPage + 1);
+  };
 
   useEffect(() => {
     getItems();
@@ -49,6 +54,8 @@ const Home = () => {
         <Pagination
           currentPage={currentPage}
           total={total}
+          handlePrev={handlePrev}
+          handleNext={handleNext}
           ITEMS_PER_PAGE={ITEMS_PER_PAGE}
         />
       ) : null}
