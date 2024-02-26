@@ -54,7 +54,9 @@ const Home = () => {
           currentPage={currentPage}
           total={Math.ceil(total / ITEMS_PER_PAGE)}
         />
-      ) : null}
+      ) : (
+        <p>loading...</p>
+      )}
     </Container>
   );
 };
