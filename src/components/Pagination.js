@@ -30,6 +30,10 @@ const Pagination = ({
 const Container = styled.div`
   padding: 16px 0;
   text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 `;
 const Button = styled.button`
   background-color: #66d;
@@ -37,7 +41,6 @@ const Button = styled.button`
   border: 0;
   padding: 8px 16px;
   border-radius: 2px;
-  margin: 0 8px;
   cursor: pointer;
   transition: all 0.2s ease;
   &:hover {

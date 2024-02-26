@@ -37,7 +37,7 @@ const Home = () => {
 
   return (
     <Container>
-      <div>
+      <SearchContainer>
         <label htmlFor="search">Search: </label>
         <Input
           type="text"
@@ -49,7 +49,7 @@ const Home = () => {
         <Link to={`/pokemon/${query}`}>
           <Button>Search</Button>
         </Link>
-      </div>
+      </SearchContainer>
       <List items={items}></List>
       {total ? (
         <Pagination
@@ -69,11 +69,17 @@ const Container = styled.section`
   margin: 0 auto;
   flex: 1;
 `;
+
+const SearchContainer = styled.section`
+  display: flex;
+  gap: 8px;
+  align-items: center;
+`;
 const Input = styled.input`
   padding: 7px;
   border-radius: 2px;
   border: 1px solid #333;
-  margin: 0 4px;
+  min-width: 0;
 `;
 const Button = styled.button`
   background-color: #66d;

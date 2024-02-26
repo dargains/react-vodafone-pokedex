@@ -30,14 +30,14 @@ const Container = styled.section`
   font-family: Helvetica, Arial;
 `;
 const Header = styled.header`
-  padding: 40px 24px;
+  padding: 40px 16px;
   background-color: #66d;
   color: #eee;
   font-size: 2em;
 `;
 const Main = styled.main`
   flex: 1;
-  padding: 20px 24px;
+  padding: 20px 16px;
 `;
 const Footer = styled.footer`
   text-align: center;
