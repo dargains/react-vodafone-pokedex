@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { Link } from "react-router-dom";
+import styled from "styled-components";
+import axios from "axios";
 import List from "./List";
 import Pagination from "./Pagination";
 
@@ -35,10 +36,10 @@ const Home = () => {
   }, [currentPage]);
 
   return (
-    <section>
+    <Container>
       <div>
-        <label htmlFor="search">Search</label>
-        <input
+        <label htmlFor="search">Search: </label>
+        <Input
           type="text"
           name="search"
           id="search"
@@ -46,7 +47,7 @@ const Home = () => {
           onChange={({ target }) => setQuery(target.value)}
         />
         <Link to={`/pokemon/${query}`}>
-          <button>Search</button>
+          <Button>Search</Button>
         </Link>
       </div>
       <List items={items}></List>
@@ -59,8 +60,32 @@ const Home = () => {
           ITEMS_PER_PAGE={ITEMS_PER_PAGE}
         />
       ) : null}
-    </section>
+    </Container>
   );
 };
+
+const Container = styled.section`
+  max-width: 800px;
+  margin: 0 auto;
+  flex: 1;
+`;
+const Input = styled.input`
+  padding: 7px;
+  border-radius: 2px;
+  border: 1px solid #333;
+  margin: 0 4px;
+`;
+const Button = styled.button`
+  background-color: #66d;
+  color: #eee;
+  border: 0;
+  padding: 8px 16px;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  &:hover {
+    background-color: #33b;
+  }
+`;
 
 export default Home;

@@ -13,11 +13,18 @@ const RenderPokemon = ({ name, sprites, types, stats, cries }) => (
     <h3>{`Type${types.length > 1 ? "s" : ""}:`}</h3>
     <p>{types.map((type) => type.type.name).join(" and ")}</p>
     <h3>Stats:</h3>
-    {stats.map((stat) => (
-      <p>
-        {stat.stat.name}: {stat.base_stat}
-      </p>
-    ))}
+    <table>
+      <tr>
+        <th>Stat</th>
+        <th>Value</th>
+      </tr>
+      {stats.map((stat) => (
+        <tr>
+          <td>{stat.stat.name}</td>
+          <td>{stat.base_stat}</td>
+        </tr>
+      ))}
+    </table>
   </>
 );
 
