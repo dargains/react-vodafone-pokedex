@@ -13,7 +13,7 @@ const Pagination = ({ currentPage, total }) => {
       <span>
         Page {currentPage} of {total}
       </span>
-      {currentPage < total - 1 ? (
+      {currentPage < total ? (
         <Link to={`/${currentPage + 1}`} id="next">
           <Button>next</Button>
         </Link>
