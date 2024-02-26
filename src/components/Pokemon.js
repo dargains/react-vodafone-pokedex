@@ -8,23 +8,29 @@ const RenderPokemon = ({ name, sprites, types, stats, cries }) => (
     <Name id="name">{name}</Name>
     <figure>
       <img src={sprites.front_default} alt={`${name} front`} />
-      <img src={sprites.back_default} alt={`${name} back`} />
+      {sprites.back_default ? (
+        <img src={sprites.back_default} alt={`${name} back`} />
+      ) : null}
     </figure>
     <audio src={cries.legacy} controls></audio>
     <SectionTitle>{`Type${types.length > 1 ? "s" : ""}`}</SectionTitle>
     <p>{types.map((type) => type.type.name).join(" and ")}</p>
     <SectionTitle>Stats</SectionTitle>
     <table>
-      <tr>
-        <TH>Stat</TH>
-        <TH>Value</TH>
-      </tr>
-      {stats.map((stat) => (
+      <thead>
         <tr>
-          <TD>{stat.stat.name}</TD>
-          <TD>{stat.base_stat}</TD>
+          <TH>Stat</TH>
+          <TH>Value</TH>
         </tr>
-      ))}
+      </thead>
+      <tbody>
+        {stats.map((stat) => (
+          <tr key={stat.stat.name}>
+            <TD>{stat.stat.name}</TD>
+            <TD>{stat.base_stat}</TD>
+          </tr>
+        ))}
+      </tbody>
     </table>
   </>
 );
