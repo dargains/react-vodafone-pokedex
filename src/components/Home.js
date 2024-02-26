@@ -16,21 +16,20 @@ const Home = () => {
 
   const ITEMS_PER_PAGE = 10;
 
-  const getItems = async () => {
-    const {
-      data: { results, count },
-    } = await axios.get(
-      `?limit=${ITEMS_PER_PAGE}&offset=${(currentPage - 1) * ITEMS_PER_PAGE}`
-    );
-    setItems(results);
-    setTotal(count);
-  };
-
   useEffect(() => {
     if (initialPage) setCurrentPage(parseInt(initialPage));
   }, [initialPage]);
 
   useEffect(() => {
+    const getItems = async () => {
+      const {
+        data: { results, count },
+      } = await axios.get(
+        `?limit=${ITEMS_PER_PAGE}&offset=${(currentPage - 1) * ITEMS_PER_PAGE}`
+      );
+      setItems(results);
+      setTotal(count);
+    };
     getItems();
   }, [currentPage]);
 
