@@ -1,27 +1,22 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-const Pagination = ({
-  currentPage,
-  total,
-  handlePrev,
-  handleNext,
-  ITEMS_PER_PAGE,
-}) => {
+const Pagination = ({ currentPage, total }) => {
   return (
     <Container id="pagination">
-      {currentPage ? (
-        <Button onClick={handlePrev} id="previous">
-          prev
-        </Button>
+      {currentPage - 1 ? (
+        <Link to={`/${currentPage - 1}`} id="previous">
+          <Button>prev</Button>
+        </Link>
       ) : null}
       <span>
-        Page {currentPage + 1} of {Math.ceil(total / ITEMS_PER_PAGE)}
+        Page {currentPage} of {total}
       </span>
-      {currentPage < Math.ceil(total / ITEMS_PER_PAGE) - 1 ? (
-        <Button onClick={handleNext} id="next">
-          next
-        </Button>
+      {currentPage < total - 1 ? (
+        <Link to={`/${currentPage + 1}`} id="next">
+          <Button>next</Button>
+        </Link>
       ) : null}
     </Container>
   );

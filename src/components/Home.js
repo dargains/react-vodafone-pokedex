@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
 import List from "./List";
 import Pagination from "./Pagination";
 
 const Home = () => {
-  const [currentPage, setCurrentPage] = useState(0);
+  const { page: initialPage } = useParams();
+  const [currentPage, setCurrentPage] = useState(
+    initialPage ? parseInt(initialPage) : 1
+  );
   const [query, setQuery] = useState("");
   const [items, setItems] = useState([]);
   const [total, setTotal] = useState(0);
@@ -17,19 +20,15 @@ const Home = () => {
     const {
       data: { results, count },
     } = await axios.get(
-      `?limit=${ITEMS_PER_PAGE}&offset=${currentPage * ITEMS_PER_PAGE}`
+      `?limit=${ITEMS_PER_PAGE}&offset=${(currentPage - 1) * ITEMS_PER_PAGE}`
     );
     setItems(results);
     setTotal(count);
   };
 
-  const handlePrev = () => {
-    setCurrentPage(currentPage - 1);
-  };
-
-  const handleNext = () => {
-    setCurrentPage(currentPage + 1);
-  };
+  useEffect(() => {
+    if (initialPage) setCurrentPage(parseInt(initialPage));
+  }, [initialPage]);
 
   useEffect(() => {
     getItems();
@@ -54,10 +53,7 @@ const Home = () => {
       {total ? (
         <Pagination
           currentPage={currentPage}
-          total={total}
-          handlePrev={handlePrev}
-          handleNext={handleNext}
-          ITEMS_PER_PAGE={ITEMS_PER_PAGE}
+          total={Math.ceil(total / ITEMS_PER_PAGE)}
         />
       ) : null}
     </Container>
@@ -65,7 +61,7 @@ const Home = () => {
 };
 
 const Container = styled.section`
-  max-width: 800px;
+  max-width: 600px;
   margin: 0 auto;
   flex: 1;
 `;
@@ -80,6 +76,7 @@ const Input = styled.input`
   border-radius: 2px;
   border: 1px solid #333;
   min-width: 0;
+  flex: 1;
 `;
 const Button = styled.button`
   background-color: #66d;

@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Link } from "react-router-dom";
 import styled from "styled-components";
 import Home from "./components/Home";
 import Pokemon from "./components/Pokemon";
@@ -8,17 +8,22 @@ import "./reset.css";
 const App = () => (
   <Container>
     <Header>
-      <h1>Pokédex</h1>
+      <Link to="/">
+        <h1>Pokédex</h1>
+      </Link>
     </Header>
     <Main>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/:page?" element={<Home />} />
         <Route path="/pokemon/:name" element={<Pokemon />} />
         <Route path="*" element={PageNotFound} />
       </Routes>
     </Main>
     <Footer>
-      <p>Made By André Dargains - Vodafone Portugal</p>
+      <p>
+        Made By <a href="mailto:andre.dargains@vodafone.com">André Dargains</a>{" "}
+        - Vodafone Portugal
+      </p>
     </Footer>
   </Container>
 );
